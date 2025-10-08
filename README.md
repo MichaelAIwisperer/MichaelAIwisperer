@@ -50,3 +50,13 @@ python coinbase_example.py
 
 Make sure your API key has the correct permissions for the endpoints you call.
 
+### Fetch authenticated account balances
+
+```bash
+export COINBASE_API_KEY=your_key
+export COINBASE_API_SECRET=your_secret
+python coinbase_balances.py
+```
+
+This script lists your accounts with available, hold, and total balances.
+
