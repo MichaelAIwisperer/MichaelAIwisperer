@@ -5,6 +5,7 @@ from .client import make_client
 from .services.market import list_top_products
 from .services.accounts import list_accounts
 from .services.key_perms import get_permissions
+from .services.fees import get_transaction_summary as fees_summary
 from .runner import run_strategy
 from .services import convert as convert_svc
 from .strategy.sma import SmaCrossoverStrategy
@@ -115,6 +116,22 @@ def build_parser() -> argparse.ArgumentParser:
         resp = get_permissions(client)
         print(resp.__dict__)
     sk.set_defaults(func=_k)
+
+    sf = sub.add_parser("fees", help="Show transaction summary (fees)")
+    sf.add_argument("--product_type")
+    sf.add_argument("--contract_expiry_type")
+    sf.add_argument("--product_venue")
+    def _f(args: argparse.Namespace) -> None:
+        cfg = load_config()
+        client = make_client(cfg)
+        resp = fees_summary(
+            client,
+            product_type=args.product_type,
+            contract_expiry_type=args.contract_expiry_type,
+            product_venue=args.product_venue,
+        )
+        print(resp.__dict__)
+    sf.set_defaults(func=_f)
 
     return p
 

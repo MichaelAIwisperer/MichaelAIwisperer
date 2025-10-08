@@ -39,4 +39,10 @@ Key permissions (auth):
 ```bash
 cb key-perms
 ```
+
+Fees summary (auth):
+
+```bash
+cb fees --product_type SPOT
+```
 ```
