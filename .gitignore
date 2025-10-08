@@ -1,0 +1,5 @@
+.env
+.coinbase_key.json
+__pycache__/
+*.pyc
+.venv/

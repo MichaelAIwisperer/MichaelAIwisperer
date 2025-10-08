@@ -19,6 +19,14 @@ cp .env.example .env
 # fill COINBASE_API_KEY and COINBASE_API_SECRET for private endpoints
 ```
 
+Alternatively, use a key file:
+
+```bash
+cp .coinbase_key.json.example .coinbase_key.json
+# fill name and privateKey fields
+echo 'COINBASE_API_KEY_FILE=.coinbase_key.json' >> .env
+```
+
 CLI usage:
 
 ```bash
