@@ -44,5 +44,15 @@ Fees summary (auth):
 
 ```bash
 cb fees --product_type SPOT
+
+Market data:
+
+```bash
+# candles (ISO8601 times)
+cb candles BTC-USD 2025-01-01T00:00:00Z 2025-01-01T02:00:00Z ONE_MINUTE --limit 100
+
+# trades snapshot
+cb trades BTC-USD 5
+```
 ```
 ```

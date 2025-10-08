@@ -3,6 +3,7 @@ import argparse
 from .config import load_config
 from .client import make_client
 from .services.market import list_top_products
+from .services import market as market_svc
 from .services.accounts import list_accounts
 from .services.key_perms import get_permissions
 from .services.fees import get_transaction_summary as fees_summary
@@ -116,6 +117,44 @@ def build_parser() -> argparse.ArgumentParser:
         resp = get_permissions(client)
         print(resp.__dict__)
     sk.set_defaults(func=_k)
+
+    smc = sub.add_parser("candles", help="Get public candles")
+    smc.add_argument("product")
+    smc.add_argument("start")
+    smc.add_argument("end")
+    smc.add_argument("granularity")
+    smc.add_argument("--limit", type=int)
+    def _cand(args: argparse.Namespace) -> None:
+        cfg = load_config()
+        client = make_client(cfg)
+        resp = market_svc.get_candles(
+            client,
+            product_id=args.product,
+            start=args.start,
+            end=args.end,
+            granularity=args.granularity,
+            limit=args.limit,
+        )
+        print(resp.__dict__)
+    smc.set_defaults(func=_cand)
+
+    smt = sub.add_parser("trades", help="Get public market trades snapshot")
+    smt.add_argument("product")
+    smt.add_argument("limit", type=int)
+    smt.add_argument("--start")
+    smt.add_argument("--end")
+    def _trd(args: argparse.Namespace) -> None:
+        cfg = load_config()
+        client = make_client(cfg)
+        resp = market_svc.get_market_trades(
+            client,
+            product_id=args.product,
+            limit=args.limit,
+            start=args.start,
+            end=args.end,
+        )
+        print(resp.__dict__)
+    smt.set_defaults(func=_trd)
 
     sf = sub.add_parser("fees", help="Show transaction summary (fees)")
     sf.add_argument("--product_type")
