@@ -29,12 +29,19 @@ def format_balance(account: Dict[str, Any]) -> str:
 def main() -> int:
     api_key = os.getenv("COINBASE_API_KEY")
     api_secret = os.getenv("COINBASE_API_SECRET")
+    private_key_file = os.getenv("COINBASE_PRIVATE_KEY_FILE")
 
-    if not api_key or not api_secret:
-        print("ERROR: Please export COINBASE_API_KEY and COINBASE_API_SECRET.")
+    if not api_key:
+        print("ERROR: Please export COINBASE_API_KEY.")
         return 1
 
-    client = RESTClient(api_key=api_key, api_secret=api_secret)
+    if private_key_file:
+        client = RESTClient(api_key=api_key, key_file=private_key_file)
+    else:
+        if not api_secret:
+            print("ERROR: Please export COINBASE_API_SECRET or COINBASE_PRIVATE_KEY_FILE.")
+            return 1
+        client = RESTClient(api_key=api_key, api_secret=api_secret)
 
     try:
         accounts_resp = client.get_accounts(limit=250)
