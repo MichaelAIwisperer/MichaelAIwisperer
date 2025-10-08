@@ -1,0 +1,22 @@
+# Environments
+a.env
+.env
+.venv/
+venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Editors/OS
+.DS_Store
+.idea/
+.vscode/
