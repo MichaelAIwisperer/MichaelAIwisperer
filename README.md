@@ -33,4 +33,10 @@ cb convert quote FROM_ACCOUNT_UUID TO_ACCOUNT_UUID 10.0
 cb convert get TRADE_ID FROM_ACCOUNT_UUID TO_ACCOUNT_UUID
 cb convert commit TRADE_ID FROM_ACCOUNT_UUID TO_ACCOUNT_UUID
 ```
+
+Key permissions (auth):
+
+```bash
+cb key-perms
+```
 ```

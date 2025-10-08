@@ -4,6 +4,7 @@ from .config import load_config
 from .client import make_client
 from .services.market import list_top_products
 from .services.accounts import list_accounts
+from .services.key_perms import get_permissions
 from .runner import run_strategy
 from .services import convert as convert_svc
 from .strategy.sma import SmaCrossoverStrategy
@@ -106,6 +107,14 @@ def build_parser() -> argparse.ArgumentParser:
         )
         print(resp.__dict__)
     sc_c.set_defaults(func=_c)
+
+    sk = sub.add_parser("key-perms", help="Show API key permissions (auth)")
+    def _k(args: argparse.Namespace) -> None:
+        cfg = load_config()
+        client = make_client(cfg)
+        resp = get_permissions(client)
+        print(resp.__dict__)
+    sk.set_defaults(func=_k)
 
     return p
 
