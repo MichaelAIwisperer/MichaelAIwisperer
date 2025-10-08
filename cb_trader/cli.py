@@ -26,7 +26,14 @@ def cmd_accounts(args: argparse.Namespace) -> None:
     client = make_client(cfg)
     resp = list_accounts(client, limit=args.limit)
     for a in resp.accounts:
-        print(f"{a.uuid} {a.currency} {a.available_balance.value} {a.available_balance.currency}")
+        bal = a.available_balance
+        if isinstance(bal, dict):
+            value = bal.get("value")
+            currency = bal.get("currency")
+        else:
+            value = getattr(bal, "value", None)
+            currency = getattr(bal, "currency", None)
+        print(f"{a.uuid} {a.currency} {value} {currency}")
 
 
 def cmd_run(args: argparse.Namespace) -> None:
