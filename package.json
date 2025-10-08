@@ -1,0 +1,26 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "- 👋 Hi, I’m @MichaelAIwisperer - 👀 I’m interested in AI, machine learning, prompt engineering, ethical AI development and coding applications that improve the quality of life ... - 🌱 I’m currently learning to prompt, studying other developers work like siraj raval - 💞️ I’m looking to collaborate on apps - 📫 How to reach me facebook, linkedin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelAIwisperer/MichaelAIwisperer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelAIwisperer/MichaelAIwisperer/issues"
+  },
+  "homepage": "https://github.com/MichaelAIwisperer/MichaelAIwisperer#readme",
+  "type": "module",
+  "dependencies": {
+    "@coinbase/cdp-sdk": "^1.38.3",
+    "@coinbase/coinbase-sdk": "^0.25.0",
+    "dotenv": "^17.2.3"
+  }
+}
