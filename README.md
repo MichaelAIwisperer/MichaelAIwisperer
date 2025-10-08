@@ -54,5 +54,19 @@ cb candles BTC-USD 2025-01-01T00:00:00Z 2025-01-01T02:00:00Z ONE_MINUTE --limit 
 # trades snapshot
 cb trades BTC-USD 5
 ```
+
+Orders (paper by default; add --live to place):
+
+```bash
+# Preview market buy (quote size in quote currency)
+cb order market-buy BTC-USD --quote_size 10
+
+# Preview market sell (base size in base currency)
+cb order market-sell BTC-USD --base_size 0.001
+
+# Execute live (CAUTION: places real orders)
+cb order market-buy BTC-USD --quote_size 10 --live
+cb order market-sell BTC-USD --base_size 0.001 --live
+```
 ```
 ```

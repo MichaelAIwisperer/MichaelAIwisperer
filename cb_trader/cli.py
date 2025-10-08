@@ -7,6 +7,7 @@ from .services import market as market_svc
 from .services.accounts import list_accounts
 from .services.key_perms import get_permissions
 from .services.fees import get_transaction_summary as fees_summary
+from .services import orders as order_svc
 from .runner import run_strategy
 from .services import convert as convert_svc
 from .strategy.sma import SmaCrossoverStrategy
@@ -155,6 +156,40 @@ def build_parser() -> argparse.ArgumentParser:
         )
         print(resp.__dict__)
     smt.set_defaults(func=_trd)
+
+    so = sub.add_parser("order", help="Order actions")
+    so_sub = so.add_subparsers(dest="subcmd", required=True)
+
+    som_b = so_sub.add_parser("market-buy", help="Market buy (paper by default)")
+    som_b.add_argument("product")
+    som_b.add_argument("--quote_size")
+    som_b.add_argument("--base_size")
+    som_b.add_argument("--live", action="store_true", help="Execute live order")
+    def _omb(args: argparse.Namespace) -> None:
+        cfg = load_config()
+        client = make_client(cfg)
+        if args.live:
+            resp = order_svc.market_buy(client, product_id=args.product, quote_size=args.quote_size)
+        else:
+            resp = order_svc.preview_market_buy(
+                client, product_id=args.product, quote_size=args.quote_size, base_size=args.base_size
+            )
+        print(resp.__dict__)
+    som_b.set_defaults(func=_omb)
+
+    som_s = so_sub.add_parser("market-sell", help="Market sell (paper by default)")
+    som_s.add_argument("product")
+    som_s.add_argument("--base_size", required=True)
+    som_s.add_argument("--live", action="store_true", help="Execute live order")
+    def _oms(args: argparse.Namespace) -> None:
+        cfg = load_config()
+        client = make_client(cfg)
+        if args.live:
+            resp = order_svc.market_sell(client, product_id=args.product, base_size=args.base_size)
+        else:
+            resp = order_svc.preview_market_sell(client, product_id=args.product, base_size=args.base_size)
+        print(resp.__dict__)
+    som_s.set_defaults(func=_oms)
 
     sf = sub.add_parser("fees", help="Show transaction summary (fees)")
     sf.add_argument("--product_type")
