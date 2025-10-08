@@ -25,4 +25,12 @@ CLI usage:
 cb public --limit 5
 cb accounts --limit 20
 cb run --product BTC-USD --short 5 --long 20 --interval 2 --ticks 20
+
+Convert (requires private credentials and correct account UUIDs):
+
+```bash
+cb convert quote FROM_ACCOUNT_UUID TO_ACCOUNT_UUID 10.0
+cb convert get TRADE_ID FROM_ACCOUNT_UUID TO_ACCOUNT_UUID
+cb convert commit TRADE_ID FROM_ACCOUNT_UUID TO_ACCOUNT_UUID
+```
 ```
