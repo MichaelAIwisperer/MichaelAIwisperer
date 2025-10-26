@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+.env.*.local
+
+# Data/Models
+/data/
+/models/
+/checkpoints/
+/logs/
+
+# OS/Editor
+.DS_Store
+.idea/
+.vscode/
+.pytest_cache/
+
+# Byte-compiled
+*.pyo
+*.pyd
+
+# Notebooks
+.ipynb_checkpoints/
