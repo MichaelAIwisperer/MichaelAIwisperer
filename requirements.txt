@@ -1,0 +1,4 @@
+numpy>=1.26
+rich>=13.7
+tqdm>=4.66
+pyyaml>=6.0
